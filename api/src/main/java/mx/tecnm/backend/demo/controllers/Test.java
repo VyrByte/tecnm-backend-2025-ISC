@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import mx.tecnm.backend.demo.models.Producto;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
