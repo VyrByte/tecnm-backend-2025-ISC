@@ -1,0 +1,19 @@
+{
+"configurations":[
+    {
+        "type": "java",
+        "name": "DemoApplication",
+        "request": "launch",
+        "mainClass": "mx.tecnm.backend.demo.DemoApplication",
+        "projectName": "demo"
+    },
+    {
+        "type": "java",
+        "name": "Launch Spring Boot App",
+        "request": "launch",
+        "mainClass": "mx.tecnm.backend.demo.ApiApplication",
+        "projectName": "api",
+        "envFile": "${workspaceFolder}/.env"
+    }
+]
+}
