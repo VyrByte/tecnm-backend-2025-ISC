@@ -1,0 +1,15 @@
+package mx. tecnm.ecommerce.api.repository;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.lang.NonNull;
+import mx. tecnm.ecommerce.api.models.MetodoPago;
+
+public class MetodoPagoRM implements RowMapper<MetodoPago> {
+    @Override
+    public MetodoPago mapRow(@NonNull java.sql.ResultSet rs, int rowNum) throws java.sql.SQLException {
+        return new MetodoPago(
+                rs.getInt("id"),
+                rs. getString("nombre"),
+                rs.getFloat("comision"));
+    }
+}
