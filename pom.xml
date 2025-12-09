@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.3.0</version>
         <relativePath/>
     </parent>
     <groupId>mx.tecnm.ecommerce</groupId>
@@ -16,7 +16,7 @@
     <description>API REST para sistema de E-Commerce</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
 
     <dependencies>
