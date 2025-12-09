@@ -1,14 +1,14 @@
-package mx.tecnm.ecommerce.api. controllers;
+package mx.tecnm.ecommerce.api.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web. bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-import mx.tecnm.ecommerce. api.models.DetallesCarrito;
-import mx.tecnm.ecommerce.api.models. Producto;
-import mx.tecnm. ecommerce.api.repository.DetallesCarritoDAO;
-import mx.tecnm. ecommerce.api.repository. ProductoDAO;
+import mx.tecnm.ecommerce.api.models.DetallesCarrito;
+import mx.tecnm.ecommerce.api.models.Producto;
+import mx.tecnm.ecommerce.api.repository.DetallesCarritoDAO;
+import mx.tecnm.ecommerce.api.repository.ProductoDAO;
 import mx.tecnm.ecommerce.api.dto.DetallesCarritoDTO;
 import mx.tecnm.ecommerce.api.dto.PUTDetallesCarritoDTO;
 
@@ -50,7 +50,7 @@ public class DetallesCarritoController {
             return ResponseEntity.badRequest().build();
         }
 
-        DetallesCarrito nuevoDetalle = detallesCarritoDAO.insertarDetalleCarrito(dto, producto. precio());
+        DetallesCarrito nuevoDetalle = detallesCarritoDAO.insertarDetalleCarrito(dto, producto.precio());
         return ResponseEntity.status(201).body(nuevoDetalle);
     }
 
