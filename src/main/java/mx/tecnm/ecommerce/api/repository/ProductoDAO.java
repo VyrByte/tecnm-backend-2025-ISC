@@ -1,4 +1,3 @@
-//mx/tecnm/ecommerce/api/repository/ProductoDAO.java
 package mx.tecnm.ecommerce.api.repository;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class ProductoDAO {
     private JdbcClient jdbcClient;
 
     public List<Producto> obtenerProductos() {
-        String sql = "SELECT id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id FROM productos";
+        String sql = "SELECT id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id FROM productos WHERE activo=true";
         return jdbcClient.sql(sql)
                 .query(new ProductoRM())
                 .list();
@@ -31,7 +30,7 @@ public class ProductoDAO {
     }
 
     public Producto insertarProducto(ProductoDTO producto) {
-        int nuevoId = jdbcClient.sql("INSERT INTO productos(nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id) VALUES (:nombre, :precio, : sku, :color, :marca, :descripcion, :peso, : alto, :ancho, :profundidad, :categorias_id) RETURNING id")
+        int filas = jdbcClient.sql("INSERT INTO productos(nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id) VALUES (:nombre, :precio, :sku, : color, :marca, :descripcion, :peso, :alto, : ancho, :profundidad, :categorias_id) RETURNING id")
             .param("nombre", producto.nombre())
             .param("precio", producto.precio())
             .param("sku", producto.sku())
@@ -45,18 +44,19 @@ public class ProductoDAO {
             .param("categorias_id", producto.categorias_id())
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
-        return obtenerProductoPorId(nuevoId);
+        return obtenerProductoPorId(filas);
     }
 
-    public boolean eliminarProducto(int id) {
-        int filas = jdbcClient.sql("DELETE FROM productos WHERE id=:id")
+    public Producto desactivarProducto(int id) {
+        int filas = jdbcClient.sql("UPDATE productos SET activo=false WHERE id=: id RETURNING id")
             .param("id", id)
-            .update();
-        return filas > 0;
+            .query((rs, rowNum) -> rs.getInt("id"))
+            .single();
+        return filas > 0 ? obtenerProductoPorId(id) : null;
     }
 
     public Producto actualizarProducto(int id, PUTProductoDTO producto) {
-        int filas = jdbcClient.sql("UPDATE productos SET nombre=:nombre, precio=:precio, sku=:sku, color=: color, marca=:marca, descripcion=:descripcion, peso=:peso, alto=:alto, ancho=:ancho, profundidad=:profundidad WHERE id=:id")
+        int filas = jdbcClient.sql("UPDATE productos SET nombre=:nombre, precio=:precio, sku=:sku, color=:color, marca=: marca, descripcion=:descripcion, peso=:peso, alto=:alto, ancho=:ancho, profundidad=:profundidad WHERE id=:id RETURNING id")
             .param("id", id)
             .param("nombre", producto.nombre())
             .param("precio", producto.precio())
@@ -68,7 +68,8 @@ public class ProductoDAO {
             .param("alto", producto.alto())
             .param("ancho", producto.ancho())
             .param("profundidad", producto.profundidad())
-            .update();
+            .query((rs, rowNum) -> rs.getInt("id"))
+            .single();
         return filas > 0 ? obtenerProductoPorId(id) : null;
     }
 }
