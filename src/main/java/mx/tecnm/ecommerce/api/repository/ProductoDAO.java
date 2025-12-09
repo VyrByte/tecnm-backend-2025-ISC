@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
-import mx.tecnm.ecommerce.api. dto.PUTProductoDTO;
-import mx. tecnm.ecommerce.api.dto.ProductoDTO;
-import mx.tecnm.ecommerce.api. models.Producto;
+import mx.tecnm.ecommerce.api.dto.PUTProductoDTO;
+import mx.tecnm.ecommerce.api.dto.ProductoDTO;
+import mx.tecnm.ecommerce.api.models.Producto;
 
 @Repository
 public class ProductoDAO {
@@ -27,7 +27,7 @@ public class ProductoDAO {
                 .param("id", id)
                 .query(new ProductoRM())
                 .list();
-        return productos.isEmpty() ? null : productos. get(0);
+        return productos.isEmpty() ? null : productos.get(0);
     }
 
     public Producto insertarProducto(ProductoDTO producto) {
@@ -39,7 +39,7 @@ public class ProductoDAO {
             .param("marca", producto.marca())
             .param("descripcion", producto.descripcion())
             .param("peso", producto.peso())
-            .param("alto", producto. alto())
+            .param("alto", producto.alto())
             .param("ancho", producto.ancho())
             .param("profundidad", producto.profundidad())
             .param("categorias_id", producto.categorias_id())
