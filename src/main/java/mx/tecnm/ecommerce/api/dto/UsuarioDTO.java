@@ -1,4 +1,3 @@
-// src/main/java/mx/tecnm/ecommerce/api/dto/UsuarioDTO.java
 package mx.tecnm.ecommerce.api.dto;
 
 import jakarta.validation.constraints.Email;
