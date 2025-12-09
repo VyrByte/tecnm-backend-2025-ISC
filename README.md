@@ -1,7 +1,3 @@
-```markdown
-# README.md
-# E-Commerce API
-
 API REST para sistema de comercio electrónico desarrollada con **Spring Boot 3.3.0** y **Java 17**, utilizando **PostgreSQL** (Supabase) como base de datos.
 
 ## 🚀 Características
