@@ -30,13 +30,13 @@ public class MetodoPagoDAO {
                 .query(new MetodoPagoRM())
                 .list();
 
-        return lista.isEmpty() ? null : lista.get(0);
+        return lista.isEmpty() ? null :lista.get(0);
     }
 
     public MetodoPago insertarMetodoPago(MetodoPagoDTO dto) {
         int nuevoId = jdbcClient.sql("""
                 INSERT INTO metodos_pago(nombre, comision)
-                VALUES (:nombre, : comision)
+                VALUES (:nombre, :comision)
                 RETURNING id
             """)
             .param("nombre", dto.nombre())
@@ -59,7 +59,7 @@ public class MetodoPagoDAO {
             .param("comision", dto. comision())
             .update();
 
-        return filas > 0 ? obtenerMetodoPagoPorId(id) : null;
+        return filas > 0 ? obtenerMetodoPagoPorId(id) :null;
     }
 
     public MetodoPago desactivarMetodoPago(int id) {
@@ -71,6 +71,6 @@ public class MetodoPagoDAO {
             .param("id", id)
             .update();
 
-        return filas > 0 ? obtenerMetodoPagoPorId(id) : null;
+        return filas > 0 ? obtenerMetodoPagoPorId(id) :null;
     }
 }

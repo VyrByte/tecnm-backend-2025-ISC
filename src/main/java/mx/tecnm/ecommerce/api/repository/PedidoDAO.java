@@ -26,7 +26,7 @@ public class PedidoDAO {
                 .param("id", id)
                 .query(new PedidoRM())
                 .list();
-        return pedidos.isEmpty() ? null : pedidos.get(0);
+        return pedidos.isEmpty() ? null :pedidos.get(0);
     }
 
     public Pedido insertarPedido(AgregarPedidoDTO dto, double importe_productos) {
@@ -57,13 +57,13 @@ public class PedidoDAO {
             .param("importe_envio", dto.importe_envio())
             .update();
 
-        return filas > 0 ? obtenerPedidoPorId(id) : null;
+        return filas > 0 ? obtenerPedidoPorId(id) :null;
     }
 
     public Pedido desactivarPedido(int id) {
-        int filas = jdbcClient.sql("UPDATE pedidos SET activo=false WHERE id=: id")
+        int filas = jdbcClient.sql("UPDATE pedidos SET activo=false WHERE id=:id")
             .param("id", id)
             .update();
-        return filas > 0 ? obtenerPedidoPorId(id) : null;
+        return filas > 0 ? obtenerPedidoPorId(id) :null;
     }
 }

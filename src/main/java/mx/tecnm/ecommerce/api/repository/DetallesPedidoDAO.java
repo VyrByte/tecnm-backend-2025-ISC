@@ -26,7 +26,7 @@ public class DetallesPedidoDAO {
                 .param("id", id)
                 .query(new DetallesPedidoRM())
                 .list();
-        return detalles.isEmpty() ? null : detalles.get(0);
+        return detalles.isEmpty() ? null :detalles.get(0);
     }
 
     public List<DetallesPedido> obtenerDetallesPorPedido(int pedidoId) {
@@ -65,13 +65,13 @@ public class DetallesPedidoDAO {
             .param("precio", dto.precio())
             .update();
 
-        return filas > 0 ? obtenerDetallesPedidoPorId(id) : null;
+        return filas > 0 ? obtenerDetallesPedidoPorId(id) :null;
     }
 
     public DetallesPedido desactivarDetallePedido(int id) {
         int filas = jdbcClient.sql("UPDATE detalles_pedido SET activo=false WHERE id=:id")
             .param("id", id)
             .update();
-        return filas > 0 ? obtenerDetallesPedidoPorId(id) : null;
+        return filas > 0 ? obtenerDetallesPedidoPorId(id) :null;
     }
 }

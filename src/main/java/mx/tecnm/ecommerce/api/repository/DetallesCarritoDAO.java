@@ -26,7 +26,7 @@ public class DetallesCarritoDAO {
                 .param("id", id)
                 .query(new DetallesCarritoRM())
                 .list();
-        return detalles.isEmpty() ? null : detalles.get(0);
+        return detalles.isEmpty() ? null :detalles.get(0);
     }
 
     public List<DetallesCarrito> obtenerDetallesCarritoPorUsuario(int usuarioId) {
@@ -56,21 +56,21 @@ public class DetallesCarritoDAO {
     public DetallesCarrito actualizarDetalleCarrito(int id, PUTDetallesCarritoDTO dto) {
         int filas = jdbcClient.sql("""
                 UPDATE detalles_carrito
-                SET cantidad = : cantidad
+                SET cantidad = :cantidad
                 WHERE id = :id
             """)
             .param("id", id)
             .param("cantidad", dto.cantidad())
             .update();
 
-        return filas > 0 ? obtenerDetallesCarritoPorId(id) : null;
+        return filas > 0 ? obtenerDetallesCarritoPorId(id) :null;
     }
 
     public DetallesCarrito desactivarDetalleCarrito(int id) {
-        int filas = jdbcClient.sql("UPDATE detalles_carrito SET activo=false WHERE id=: id")
+        int filas = jdbcClient.sql("UPDATE detalles_carrito SET activo=false WHERE id=:id")
             .param("id", id)
             .update();
-        return filas > 0 ? obtenerDetallesCarritoPorId(id) : null;
+        return filas > 0 ? obtenerDetallesCarritoPorId(id) :null;
     }
 
     public void limpiarCarritoPorUsuario(int usuarioId) {

@@ -27,7 +27,7 @@ public class DomicilioDAO {
     public Domicilio insertarDomicilio(DomicilioDTO dto) {
         String sql = """
             INSERT INTO domicilios (calle, numero, colonia, cp, ciudad, estado, usuarios_id)
-            VALUES (:calle, :numero, :colonia, : cp, :ciudad, :estado, :usuarioId)
+            VALUES (:calle, :numero, :colonia, :cp, :ciudad, :estado, :usuarioId)
             RETURNING id, calle, numero, colonia, cp, ciudad, estado, usuarios_id
         """;
 
@@ -55,7 +55,7 @@ public class DomicilioDAO {
                 .query(new DomicilioRM())
                 .list();
 
-        return lista.isEmpty() ? null : lista.get(0);
+        return lista.isEmpty() ? null :lista.get(0);
     }
 
     public Domicilio actualizarDomicilio(int id, DomicilioDTO dto) {
@@ -93,6 +93,6 @@ public class DomicilioDAO {
                 .param("id", id)
                 .update();
 
-        return filas > 0 ? obtenerDomiciliosPorId(id) : null;
+        return filas > 0 ? obtenerDomiciliosPorId(id) :null;
     }
 }

@@ -27,15 +27,15 @@ public class EnvioDAO {
                 .param("id", id)
                 .query(new EnvioRM())
                 .list();
-        return envios.isEmpty() ? null : envios.get(0);
+        return envios.isEmpty() ? null :envios.get(0);
     }
 
     public Envio insertarEnvio(EnvioDTO envio) {
         String numeroSeguimiento = java.util.UUID.randomUUID().toString();
-        int nuevoId = jdbcClient.sql("INSERT INTO envios (fecha_entrega, fecha_envio, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES (:fecha_entrega, : fecha_envio, :estado:: estado_envio_enum, :numero_seguimiento, : domicilios_id, : pedidos_id) RETURNING id")
+        int nuevoId = jdbcClient.sql("INSERT INTO envios (fecha_entrega, fecha_envio, estado, numero_seguimiento, domicilios_id, pedidos_id) VALUES (:fecha_entrega, :fecha_envio, :estado::estado_envio_enum, :numero_seguimiento, :domicilios_id, :pedidos_id) RETURNING id")
             .param("fecha_entrega", envio.fecha_entrega())
             .param("fecha_envio", envio.fecha_envio())
-            .param("estado", envio.estado() != null ? envio.estado().name() : EstadoEnvio.PENDIENTE.name())
+            .param("estado", envio.estado() != null ? envio.estado().name() :EstadoEnvio.PENDIENTE.name())
             .param("numero_seguimiento", numeroSeguimiento)
             .param("domicilios_id", envio.domicilios_id())
             .param("pedidos_id", envio.pedidos_id())
@@ -54,7 +54,7 @@ public class EnvioDAO {
             .param("pedidos_id", envio.pedidos_id())
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
-        return filas > 0 ? obtenerEnvioPorId(id) : null;
+        return filas > 0 ? obtenerEnvioPorId(id) :null;
     }
 
     public Envio desactivarEnvio(int id) {
@@ -62,6 +62,6 @@ public class EnvioDAO {
             .param("id", id)
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
-        return filas > 0 ? obtenerEnvioPorId(id) : null;
+        return filas > 0 ? obtenerEnvioPorId(id) :null;
     }
 }

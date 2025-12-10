@@ -25,11 +25,11 @@ public class UsuarioDAO {
                 .param("id", id)
                 .query(new UsuarioRM())
                 .list();
-        return usuarios.isEmpty() ? null : usuarios.get(0);
+        return usuarios.isEmpty() ? null :usuarios.get(0);
     }
 
     public Usuario insertarUsuario(UsuarioDTO usuario) {
-        int filas = jdbcClient.sql("INSERT INTO usuarios(nombre, email, telefono, sexo, fecha_nacimiento, contrasena) VALUES (:nombre,: email,:telefono,:sexo:: sexo_enum,:fecha_nacimiento,:contrasena) RETURNING id")
+        int filas = jdbcClient.sql("INSERT INTO usuarios(nombre, email, telefono, sexo, fecha_nacimiento, contrasena) VALUES (:nombre,:email,:telefono,:sexo::sexo_enum,:fecha_nacimiento,:contrasena) RETURNING id")
             .param("nombre", usuario.nombre())
             .param("email", usuario.email())
             .param("telefono", usuario.telefono())
@@ -46,11 +46,11 @@ public class UsuarioDAO {
             .param("id", id)
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
-        return filas > 0 ? obtenerUsuarioPorId(id) : null;
+        return filas > 0 ? obtenerUsuarioPorId(id) :null;
     }
 
     public Usuario actualizarUsuario(int id, UsuarioDTO usuario) {
-        int filas = jdbcClient.sql("UPDATE usuarios SET nombre=:nombre, email=:email, telefono=:telefono, sexo=:sexo:: sexo_enum, fecha_nacimiento=:fecha_nacimiento, contrasena=:contrasena WHERE id=:id RETURNING id")
+        int filas = jdbcClient.sql("UPDATE usuarios SET nombre=:nombre, email=:email, telefono=:telefono, sexo=:sexo::sexo_enum, fecha_nacimiento=:fecha_nacimiento, contrasena=:contrasena WHERE id=:id RETURNING id")
             .param("id", id)
             .param("nombre", usuario.nombre())
             .param("email", usuario.email())
@@ -60,6 +60,6 @@ public class UsuarioDAO {
             .param("contrasena", usuario. contrasena())
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
-        return filas > 0 ? obtenerUsuarioPorId(id) : null;
+        return filas > 0 ? obtenerUsuarioPorId(id) :null;
     }
 }

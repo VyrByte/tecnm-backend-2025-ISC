@@ -19,13 +19,13 @@ public class CategoriaDAO {
     }
 
     public Categoria obtenerCategoriaPorId(int id) {
-        String sql = "SELECT id, nombre FROM categorias WHERE id = : id";
+        String sql = "SELECT id, nombre FROM categorias WHERE id = :id";
         List<Categoria> categorias = jdbcClient.sql(sql)
                 .param("id", id)
                 .query(new CategoriaRM())
                 .list();
         
-        return categorias.isEmpty() ? null : categorias.get(0);
+        return categorias.isEmpty() ? null :categorias.get(0);
     }
 
     public Categoria insertarCategoria(String categoria) {
@@ -37,7 +37,7 @@ public class CategoriaDAO {
     }
 
     public Categoria actualizarCategoria(int id, String nombre) {
-        String sql = "UPDATE categorias SET nombre = :nombre WHERE id = : id RETURNING id, nombre";
+        String sql = "UPDATE categorias SET nombre = :nombre WHERE id = :id RETURNING id, nombre";
         return jdbcClient.sql(sql)
                 .param("id", id)
                 .param("nombre", nombre)
