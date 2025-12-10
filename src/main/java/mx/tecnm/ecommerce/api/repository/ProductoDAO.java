@@ -1,13 +1,12 @@
-// src/main/java/mx/tecnm/ecommerce/api/repository/ProductoDAO.java
 package mx.tecnm.ecommerce.api.repository;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
-import org.springframework.stereotype.Repository;
+import org. springframework.stereotype.Repository;
 import mx.tecnm.ecommerce.api.dto.PUTProductoDTO;
-import mx.tecnm.ecommerce.api.dto.ProductoDTO;
-import mx.tecnm.ecommerce.api.models.Producto;
+import mx.tecnm.ecommerce. api.dto.ProductoDTO;
+import mx.tecnm.ecommerce.api. models.Producto;
 
 @Repository
 public class ProductoDAO {
@@ -16,14 +15,14 @@ public class ProductoDAO {
 
     public List<Producto> obtenerProductos() {
         String sql = "SELECT id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id FROM productos WHERE activo=true";
-        return jdbcClient.sql(sql)
+        return jdbcClient. sql(sql)
                 .query(new ProductoRM())
                 .list();
     }
 
     public Producto obtenerProductoPorId(int id) {
         String sql = "SELECT id, nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id FROM productos WHERE id = : id";
-        List<Producto> productos = jdbcClient.sql(sql)
+        List<Producto> productos = jdbcClient. sql(sql)
                 .param("id", id)
                 .query(new ProductoRM())
                 .list();
@@ -39,7 +38,7 @@ public class ProductoDAO {
             .param("marca", producto.marca())
             .param("descripcion", producto.descripcion())
             .param("peso", producto.peso())
-            .param("alto", producto.alto())
+            .param("alto", producto. alto())
             .param("ancho", producto.ancho())
             .param("profundidad", producto.profundidad())
             .param("categorias_id", producto.categorias_id())
@@ -63,9 +62,9 @@ public class ProductoDAO {
             .param("precio", producto.precio())
             .param("sku", producto.sku())
             .param("color", producto.color())
-            .param("marca", producto.marca())
+            .param("marca", producto. marca())
             .param("descripcion", producto.descripcion())
-            .param("peso", producto.peso())
+            .param("peso", producto. peso())
             .param("alto", producto.alto())
             .param("ancho", producto.ancho())
             .param("profundidad", producto.profundidad())
