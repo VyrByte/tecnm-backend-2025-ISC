@@ -1,3 +1,4 @@
+// src/main/java/mx/tecnm/ecommerce/api/repository/ProductoDAO.java
 package mx.tecnm.ecommerce.api.repository;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class ProductoDAO {
     }
 
     public Producto insertarProducto(ProductoDTO producto) {
-        int filas = jdbcClient.sql("INSERT INTO productos(nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id) VALUES (:nombre, :precio, :sku, : color, :marca, :descripcion, :peso, :alto, : ancho, :profundidad, :categorias_id) RETURNING id")
+        int filas = jdbcClient.sql("INSERT INTO productos(nombre, precio, sku, color, marca, descripcion, peso, alto, ancho, profundidad, categorias_id) VALUES (:nombre, :precio, : sku, :color, :marca, :descripcion, :peso, : alto, :ancho, :profundidad, :categorias_id) RETURNING id")
             .param("nombre", producto.nombre())
             .param("precio", producto.precio())
             .param("sku", producto.sku())
@@ -48,7 +49,7 @@ public class ProductoDAO {
     }
 
     public Producto desactivarProducto(int id) {
-        int filas = jdbcClient.sql("UPDATE productos SET activo=false WHERE id=: id RETURNING id")
+        int filas = jdbcClient.sql("UPDATE productos SET activo=false WHERE id=:id RETURNING id")
             .param("id", id)
             .query((rs, rowNum) -> rs.getInt("id"))
             .single();
